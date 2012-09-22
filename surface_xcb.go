@@ -21,9 +21,6 @@ func NewSurfaceFromXCB(xcb_drawable xproto.Drawable, xcb_VI xproto.VisualInfo, w
 
 	var connect_xcb (*C.xcb_connection_t) = C.xcb_connect(nil, nil);
 
-	surface := new(Surface);
-	surface.surface = C.cairo_xcb_surface_create( connect_xcb, C.xcb_drawable_t(xcb_drawable), &xcb_visualtype, C.int(width), C.int(height));
-	surface.context = C.cairo_create(surface.surface);
-	
-	return surface;
+	s := C.cairo_xcb_surface_create( connect_xcb, C.xcb_drawable_t(xcb_drawable), &xcb_visualtype, C.int(width), C.int(height));
+	return &Surface{ surface: s, context: C.cairo_create(s) }
 }

@@ -29,6 +29,10 @@ Missing features
 
 ### Install cairo:
 
+For Gentoo:
+
+	emerge x11-libs/cairo
+
 For Debian and Debian derivatives including Ubuntu:
 	
 	sudo apt-get install libcairo2-dev
@@ -44,7 +48,6 @@ For openSUSE:
 ### Install go-cairo and run example:
 
 	go get github.com/ungerik/go-cairo
-	go install github.com/ungerik/go-cairo/example && example
 
 
 Copyrights: See LICENSE file

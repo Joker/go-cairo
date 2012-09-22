@@ -52,6 +52,13 @@ func (self *Surface) TextExtents(utf8 string, extents *TextExtents){
 }
 
 
+func (self *Surface) GlyphExtents(glyphs []Glyph) *TextExtents {
+    panic("not implemented") // todo
+    //C.cairo_glyph_extents
+    return nil
+}
+
+
 type TextClusterFlag int
 // cairo_text_cluster_flag_t
 const (
@@ -91,4 +98,11 @@ func (self *Surface) ShowText(text string) {
     p := C.CString(text);
     C.cairo_show_text(self.context, p);
     C.free(unsafe.Pointer(p));
+}
+
+func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []TextCluster, flags TextClusterFlag) {
+    panic("not implemented") // todo
+}
+func (self *Surface) ShowGlyphs(glyphs []Glyph) {
+    panic("not implemented") // todo
 }
