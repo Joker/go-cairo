@@ -11,7 +11,7 @@ import (
 	"image/draw"
 	"unsafe"
 
-	"./extimage"
+	"github.com/ungerik/go-cairo/extimage"
 )
 
 type Format int

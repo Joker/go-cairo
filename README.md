@@ -21,7 +21,6 @@ Overview:
 
 Missing features
 * TextCluster
-* FontExtents
 * FontFace
 * FontOptions
 * ScaledFont
