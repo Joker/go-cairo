@@ -139,24 +139,24 @@ const (
 )
 
 // cairo_text_cluster_flag_t
-type TextClusterFlag int
+// type TextClusterFlag int
 
-const (
-	TEXT_CLUSTER_FLAG_BACKWARD TextClusterFlag = 0x00000001
-)
+// const (
+// 	TEXT_CLUSTER_FLAG_BACKWARD TextClusterFlag = 0x00000001
+// )
 
 // cairo_font_slant_t values
-const (
-	FONT_SLANT_NORMAL = iota
-	FONT_SLANT_ITALIC
-	FONT_SLANT_OBLIQUE
-)
+// const (
+// 	FONT_SLANT_NORMAL = iota
+// 	FONT_SLANT_ITALIC
+// 	FONT_SLANT_OBLIQUE
+// )
 
 // cairo_font_weight_t values
-const (
-	FONT_WEIGHT_NORMAL = iota
-	FONT_WEIGHT_BOLD
-)
+// const (
+// 	FONT_WEIGHT_NORMAL = iota
+// 	FONT_WEIGHT_BOLD
+// )
 
 // cairo_subpixel_order_t values
 const (
@@ -355,18 +355,18 @@ type TextCluster struct {
 	// todo
 }
 
-type TextExtents struct {
-	Xbearing float64
-	Ybearing float64
-	Width    float64
-	Height   float64
-	Xadvance float64
-	Yadvance float64
-}
+// type TextExtents struct {
+// 	Xbearing float64
+// 	Ybearing float64
+// 	Width    float64
+// 	Height   float64
+// 	Xadvance float64
+// 	Yadvance float64
+// }
 
-type FontExtents struct {
-	// todo
-}
+// type FontExtents struct {
+// 	// todo
+// }
 
 type FontFace struct {
 	// todo

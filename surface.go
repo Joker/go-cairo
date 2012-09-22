@@ -12,7 +12,7 @@ import (
 	"image/draw"
 	"unsafe"
 
-	"github.com/ungerik/go-cairo/extimage"
+	"./extimage"
 )
 
 // Golang struct to hold both a cairo surface and a cairo context
@@ -138,10 +138,10 @@ func (self *Surface) SetLineJoin(line_join LineJoin) {
 	C.cairo_set_line_join(self.context, C.cairo_line_join_t(line_join))
 }
 
-func (self *Surface) SetDash(dashes []float64, num_dashes int, offset float64) {
-	dashesp := (*C.double)(&dashes[0])
-	C.cairo_set_dash(self.context, dashesp, C.int(num_dashes), C.double(offset))
-}
+// func (self *Surface) SetDash(dashes []float64, num_dashes int, offset float64) {
+// 	dashesp := (*C.double)(&dashes[0])
+// 	C.cairo_set_dash(self.context, dashesp, C.int(num_dashes), C.double(offset))
+// }
 
 func (self *Surface) SetMiterLimit(limit float64) {
 	C.cairo_set_miter_limit(self.context, C.double(limit))
@@ -356,15 +356,15 @@ func (self *Surface) ClipRectangleList() ([]Rectangle, Status) {
 ///////////////////////////////////////////////////////////////////////////////
 // Font/Text methods
 
-func (self *Surface) SelectFontFace(name string, font_slant_t, font_weight_t int) {
-	s := C.CString(name)
-	C.cairo_select_font_face(self.context, s, C.cairo_font_slant_t(font_slant_t), C.cairo_font_weight_t(font_weight_t))
-	C.free(unsafe.Pointer(s))
-}
+// func (self *Surface) SelectFontFace(name string, font_slant_t, font_weight_t int) {
+// 	s := C.CString(name)
+// 	C.cairo_select_font_face(self.context, s, C.cairo_font_slant_t(font_slant_t), C.cairo_font_weight_t(font_weight_t))
+// 	C.free(unsafe.Pointer(s))
+// }
 
-func (self *Surface) SetFontSize(size float64) {
-	C.cairo_set_font_size(self.context, C.double(size))
-}
+// func (self *Surface) SetFontSize(size float64) {
+// 	C.cairo_set_font_size(self.context, C.double(size))
+// }
 
 func (self *Surface) SetFontMatrix(matrix Matrix) {
 	C.cairo_set_font_matrix(self.context, matrix.cairo_matrix_t())
@@ -397,11 +397,11 @@ func (self *Surface) GetScaledFont() *ScaledFont {
 	return nil
 }
 
-func (self *Surface) ShowText(text string) {
-	cs := C.CString(text)
-	C.cairo_show_text(self.context, cs)
-	C.free(unsafe.Pointer(cs))
-}
+// func (self *Surface) ShowText(text string) {
+// 	cs := C.CString(text)
+// 	C.cairo_show_text(self.context, cs)
+// 	C.free(unsafe.Pointer(cs))
+// }
 
 func (self *Surface) ShowGlyphs(glyphs []Glyph) {
 	panic("not implemented") // todo
@@ -420,11 +420,11 @@ func (self *Surface) GlyphPath(glyphs []Glyph) {
 	panic("not implemented") // todo
 }
 
-func (self *Surface) TextExtents(text string) *TextExtents {
-	panic("not implemented") // todo
-	//C.cairo_text_extents
-	return nil
-}
+// func (self *Surface) TextExtents(text string) *TextExtents {
+// 	panic("not implemented") // todo
+// 	//C.cairo_text_extents
+// 	return nil
+// }
 
 func (self *Surface) GlyphExtents(glyphs []Glyph) *TextExtents {
 	panic("not implemented") // todo
@@ -432,11 +432,11 @@ func (self *Surface) GlyphExtents(glyphs []Glyph) *TextExtents {
 	return nil
 }
 
-func (self *Surface) FontExtents() *FontExtents {
-	panic("not implemented") // todo
-	//C.cairo_text_extents
-	return nil
-}
+// func (self *Surface) FontExtents() *FontExtents {
+// 	panic("not implemented") // todo
+// 	//C.cairo_text_extents
+// 	return nil
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Error status queries
