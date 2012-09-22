@@ -13,7 +13,9 @@ import (
 
 func (self *Surface) Save()				{ C.cairo_save(self.context) 	}
 func (self *Surface) Restore()			{ C.cairo_restore(self.context) }
-func (self *Surface) Status() Status {
+func (self *Surface) ContextDestroy()	{ C.cairo_destroy(self.context) }
+//  GetStatus() >>> Status()   and   Status() >>> ContextStatus()
+func (self *Surface) ContextStatus() Status {
 	return Status(C.cairo_status(self.context))
 }
 

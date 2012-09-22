@@ -60,7 +60,8 @@ func (self *Surface) CreateForRectangle(x, y, width, height float64) *Surface {
 
 
 
-func (self *Surface) GetStatus() Status { 					
+//  GetStatus() >>> Status()   and   Status() >>> ContextStatus()
+func (self *Surface) Status() Status {
 	return Status(C.cairo_surface_status(self.surface))
 }
 func (self *Surface) Destroy() {
