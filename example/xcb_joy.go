@@ -33,7 +33,7 @@ func main() {
 	
 
 	var (
-		// ux, uy float64 = 1, 1
+		ux, uy float64 = 1, 1
 		
 		fe cairo.FontExtents
 		te cairo.TextExtents
@@ -53,14 +53,12 @@ func main() {
 	surface.SelectFontFace("Georgia", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD);
 	surface.FontExtents(&fe);
 
-	// surface.DeviceToUserDistance(&ux, &uy);
-	// if ux > uy {
-	// 	px = ux
-	// } else {
-	// 	px = uy
-	// }
-	px = 0.004167 // todo
-
+	surface.DeviceToUserDistance(&ux, &uy);
+	if ux > uy {
+		px = ux
+	} else {
+		px = uy
+	}
 
 	surface.FontExtents(&fe);
 	surface.TextExtents(text, &te);
