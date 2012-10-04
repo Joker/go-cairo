@@ -66,9 +66,6 @@ type ScaledFont struct {
 	// todo
 }
 
-type Glyph struct {
-	// todo
-}
 
 type Device struct {
 }

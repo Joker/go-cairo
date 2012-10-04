@@ -100,9 +100,22 @@ func (self *Surface) ShowText(text string) {
     C.free(unsafe.Pointer(p));
 }
 
-func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []TextCluster, flags TextClusterFlag) {
-    panic("not implemented") // todo
+/*
+typedef struct {
+    unsigned long        index;
+    double               x;
+    double               y;
+} cairo_glyph_t;
+*/
+type Glyph struct {
+    Index   uint32
+    X, Y    float64
 }
-func (self *Surface) ShowGlyphs(glyphs []Glyph) {
+// void cairo_show_glyphs (cairo_t *cr, const cairo_glyph_t *glyphs, int num_glyphs);
+func (self *Surface) ShowGlyphs(glyphs* []Glyph, num_glyphs int) {
+    C.cairo_show_glyphs( self.context, (*C.cairo_glyph_t)(unsafe.Pointer(glyphs)), C.int(num_glyphs) )
+}
+
+func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []TextCluster, flags TextClusterFlag) {
     panic("not implemented") // todo
 }
