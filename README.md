@@ -16,15 +16,14 @@ go-cairo also sports a sub package extimage with image.Image/draw.Image
 implementations for 32 bit ARGB and 24 bit RGB color models.
 
 Overview:
-* http://go.pkgdoc.org/github.com/ungerik/go-cairo
+* http://go.pkgdoc.org/github.com/Joker/go-cairo
 * http://go.pkgdoc.org/github.com/ungerik/go-cairo/extimage
 
 Missing features
-* TextCluster
 * FontFace
 * FontOptions
 * ScaledFont
-* Glyph
+
 
 ### Install cairo:
 
@@ -44,9 +43,5 @@ For openSUSE:
 	
 	zypper install cairo-devel
   
-### Install go-cairo and run example:
-
-	go get github.com/ungerik/go-cairo
-
 
 Copyrights: See LICENSE file

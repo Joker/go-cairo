@@ -6,32 +6,19 @@ package cairo
 import "C"
 
 import (
-	"unsafe";
+	"unsafe"
 )
 
 
-/*
-typedef struct {
-    double ascent;
-    double descent;
-    double height;
-    double max_x_advance;
-    double max_y_advance;
-} cairo_font_extents_t;
 
-type FontExtents struct {
-    extents *C.cairo_font_extents_t;
-}
-*/
+type FontExtents struct {       // typedef struct {
+    Ascent        float64       //     double ascent;
+    Descent       float64       //     double descent;
+    Height        float64       //     double height;
+    Max_x_advance float64       //     double max_x_advance;
+    Max_y_advance float64       //     double max_y_advance;
+}                               // } cairo_font_extents_t;
 
-
-type FontExtents struct {
-    Ascent        float64
-    Descent       float64
-    Height        float64
-    Max_x_advance float64
-    Max_y_advance float64
-}
 // void cairo_font_extents(cairo_t *cr, cairo_font_extents_t *extents);
 func (self *Surface) FontExtents(extents *FontExtents){
 	C.cairo_font_extents(self.context, (*C.cairo_font_extents_t)(unsafe.Pointer(extents)));
@@ -59,12 +46,7 @@ func (self *Surface) GlyphExtents(glyphs []Glyph) *TextExtents {
 }
 
 
-type TextClusterFlag int
-// cairo_text_cluster_flag_t
-const (
-    // TextClusterFlagBackward TextClusterFlag = 1 << iota
-    TEXT_CLUSTER_FLAG_BACKWARD TextClusterFlag = 0x00000001
-)
+
 
 type FontSlant int
 // cairo_font_slant_t 
@@ -100,22 +82,42 @@ func (self *Surface) ShowText(text string) {
     C.free(unsafe.Pointer(p));
 }
 
-/*
-typedef struct {
-    unsigned long        index;
-    double               x;
-    double               y;
-} cairo_glyph_t;
-*/
-type Glyph struct {
-    Index   uint32
-    X, Y    float64
-}
+
+
+
+type Glyph struct {             // typedef struct {
+    Index   uint32              //     unsigned long  index;
+    X, Y    float64             //     double  x; double  y;
+}                               // } cairo_glyph_t;
+
 // void cairo_show_glyphs (cairo_t *cr, const cairo_glyph_t *glyphs, int num_glyphs);
-func (self *Surface) ShowGlyphs(glyphs* []Glyph, num_glyphs int) {
-    C.cairo_show_glyphs( self.context, (*C.cairo_glyph_t)(unsafe.Pointer(glyphs)), C.int(num_glyphs) )
+func (self *Surface) ShowGlyphs(glyphs []Glyph) {
+    C.cairo_show_glyphs( self.context, (*C.cairo_glyph_t)(unsafe.Pointer(&glyphs[0])), C.int(len(glyphs)) )
 }
 
-func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []TextCluster, flags TextClusterFlag) {
-    panic("not implemented") // todo
+
+type TextCluster struct {       // typedef struct {
+    NumBytes   int              //     int        num_bytes;
+    NumGlyphs  int              //     int        num_glyphs;
+}                               // } cairo_text_cluster_t;
+
+type TextClusterFlag int
+// cairo_text_cluster_flag_t
+const (
+    // TextClusterFlagBackward TextClusterFlag = 1 << iota
+    TEXT_CLUSTER_FLAG_BACKWARD TextClusterFlag = 0x00000001
+)
+
+// void cairo_show_text_glyphs(cairo_t *cr, const char *utf8, int utf8_len,
+//                             const cairo_glyph_t *glyphs, int num_glyphs,
+//                             const cairo_text_cluster_t *clusters, int num_clusters,
+//                             cairo_text_cluster_flags_t cluster_flags );
+func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []TextCluster, flag TextClusterFlag) {
+    utf8 := C.CString(text)
+    defer C.free(unsafe.Pointer(utf8))
+
+    C.cairo_show_text_glyphs( self.context, utf8, C.int(len(text)),
+                              (*C.cairo_glyph_t)(unsafe.Pointer(&glyphs[0])), C.int(len(glyphs)),
+                              (*C.cairo_text_cluster_t)(unsafe.Pointer(&clusters[0])), C.int(len(clusters)),
+                              C.cairo_text_cluster_flags_t(flag) );
 }

@@ -1,3 +1,4 @@
+// Go binding for the cairo graphics library
 package cairo
 
 // #cgo pkg-config: cairo
@@ -50,10 +51,6 @@ type Rectangle struct {
 	Width, Height float64
 }
 
-type TextCluster struct {
-	// todo
-}
-
 type FontFace struct {
 	// todo
 }
@@ -66,8 +63,8 @@ type ScaledFont struct {
 	// todo
 }
 
-
 type Device struct {
+	// todo	
 }
 
 func Version() int {
