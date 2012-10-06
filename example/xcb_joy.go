@@ -53,7 +53,7 @@ func main() {
 	surface.SelectFontFace("Georgia", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD);
 	surface.FontExtents(&fe);
 
-	surface.DeviceToUserDistance(&ux, &uy);
+	ux, uy = surface.DeviceToUserDistance(ux, uy);
 	if ux > uy {
 		px = ux
 	} else {

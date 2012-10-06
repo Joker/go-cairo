@@ -4,6 +4,9 @@ package cairo
 // #include <cairo/cairo.h>
 import "C"
 
+import (
+	"unsafe"
+)
 
 // void cairo_translate (cairo_t *cr, double tx, double ty);
 func (self *Surface) Translate(tx, ty float64) {
@@ -38,18 +41,22 @@ func (self *Surface) IdentityMatrix() {
 
 
 // void cairo_user_to_device (cairo_t *cr, double *x, double *y);
-func (self *Surface) UserToDevice( x, y *float64 ){
-	C.cairo_user_to_device(self.context, (*C.double)(x), (*C.double)(y))
+func (self *Surface) UserToDevice( x, y float64 ) (float64, float64) {
+	C.cairo_user_to_device( self.context, (*C.double)(unsafe.Pointer(&x)), (*C.double)(unsafe.Pointer(&y)) )
+	return x, y
 }
 // void cairo_user_to_device_distance (cairo_t *cr, double *dx, double *dy);
-func (self *Surface) UserToDeviceDistance( dx, dy *float64 ){
-	C.cairo_user_to_device_distance(self.context, (*C.double)(dx), (*C.double)(dy))
+func (self *Surface) UserToDeviceDistance( dx, dy float64 ) (float64, float64) {
+	C.cairo_user_to_device_distance( self.context, (*C.double)(unsafe.Pointer(&dx)), (*C.double)(unsafe.Pointer(&dy)) )
+	return dx, dy
 }
 // void cairo_device_to_user (cairo_t *cr, double *x, double *y);
-func (self *Surface) DeviceToUser( x, y *float64 ){
-	C.cairo_device_to_user(self.context, (*C.double)(x), (*C.double)(y))
+func (self *Surface) DeviceToUser( x, y float64 ) (float64, float64) {
+	C.cairo_device_to_user( self.context, (*C.double)(unsafe.Pointer(&x)), (*C.double)(unsafe.Pointer(&y)) )
+	return x, y
 }
 // void cairo_device_to_user_distance (cairo_t *cr, double *dx, double *dy);
-func (self *Surface) DeviceToUserDistance( dx, dy *float64 ){
-	C.cairo_device_to_user_distance(self.context, (*C.double)(dx), (*C.double)(dy));
+func (self *Surface) DeviceToUserDistance( dx, dy float64 ) (float64, float64) {
+	C.cairo_device_to_user_distance( self.context, (*C.double)(unsafe.Pointer(&dx)), (*C.double)(unsafe.Pointer(&dy)) )
+	return dx, dy
 }
