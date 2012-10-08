@@ -44,21 +44,21 @@ func (self *Pattern) AddColorStopRGBA(offset, red, green, blue, alpha float64) {
 }
 
 
-type Extent int
+type Extend int
 // cairo_extend_t
 const (
-	EXTEND_NONE Extent = iota
+	EXTEND_NONE Extend = iota
 	EXTEND_REPEAT
 	EXTEND_REFLECT
 	EXTEND_PAD
 )
 // void cairo_pattern_set_extend (cairo_pattern_t *pattern, cairo_extend_t extend);
-func (self *Pattern) SetExtend(extend Extent) {
+func (self *Pattern) SetExtend(extend Extend) {
 	C.cairo_pattern_set_extend( self.pattern, C.cairo_extend_t(extend) )
 }
 // cairo_extend_t cairo_pattern_get_extend (cairo_pattern_t *pattern);
-func (self *Pattern) GetExtend() (Extent) {
-	return Extent(C.cairo_pattern_get_extend( self.pattern ))
+func (self *Pattern) GetExtend() (Extend) {
+	return Extend(C.cairo_pattern_get_extend( self.pattern ))
 }
 
 type Filter int

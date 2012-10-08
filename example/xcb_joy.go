@@ -68,7 +68,7 @@ func main() {
 	/* baseline, descent, ascent, height */
 	surface.SetLineWidth(4*px);
 	dashlength = 9*px;
-	surface.SetDash(&dashlength, 1, 0);
+	surface.SetDash( []float64{dashlength}, 0);
 	surface.SetSourceRGBA(0, 0.6, 0, 0.5);
 	surface.MoveTo(x + te.X_bearing, y);
 	surface.RelLineTo(te.Width, 0);
@@ -84,7 +84,7 @@ func main() {
 	surface.SetSourceRGBA(0, 0, 0.75, 0.5);
 	surface.SetLineWidth(px);
 	dashlength = 3*px;
-	surface.SetDash(&dashlength, 1, 0);
+	surface.SetDash( []float64{dashlength}, 0);
 	surface.Rectangle(x + te.X_bearing, y + te.Y_bearing, te.Width, te.Height);
 	surface.Stroke();
 
@@ -94,7 +94,7 @@ func main() {
 	surface.ShowText(text);
 
 	/* bearing */
-	surface.SetDash(nil, 0, 0);
+	surface.SetDash(nil, 0);
 	surface.SetLineWidth(2 * px);
 	surface.SetSourceRGBA(0, 0, 0.75, 0.5);
 	surface.MoveTo(x, y);
