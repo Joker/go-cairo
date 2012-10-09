@@ -11,8 +11,8 @@ import (
 )
 
 
-func (self *Surface) Save()				{ C.cairo_save(self.context) 	}
-func (self *Surface) Restore()			{ C.cairo_restore(self.context) }
+func (self *Surface) Save()		{ C.cairo_save(self.context) 	}
+func (self *Surface) Restore()		{ C.cairo_restore(self.context) }
 func (self *Surface) ContextDestroy()	{ C.cairo_destroy(self.context) }
 //  GetStatus() >>> Status()   and   Status() >>> ContextStatus()
 func (self *Surface) ContextStatus() Status {
@@ -25,7 +25,7 @@ func (self *Surface) ShowPage()	{ C.cairo_show_page(self.context) }
 
 
 
-func (self *Surface) Paint()					   { C.cairo_paint(self.context) }
+func (self *Surface) Paint()			   { C.cairo_paint(self.context) }
 func (self *Surface) PaintWithAlpha(alpha float64) { C.cairo_paint_with_alpha(self.context, C.double(alpha)) }
 
 
@@ -55,12 +55,12 @@ func (self *Surface) MaskSurface(surface *Surface, surface_x, surface_y float64)
 
 
 func (self *Surface) Stroke()			{ C.cairo_stroke(self.context) }
-func (self *Surface) Fill()				{ C.cairo_fill(self.context) }
-func (self *Surface) Clip()				{ C.cairo_clip(self.context) }
+func (self *Surface) Fill()			{ C.cairo_fill(self.context) }
+func (self *Surface) Clip()			{ C.cairo_clip(self.context) }
 
 func (self *Surface) StrokePreserve()	{ C.cairo_stroke_preserve(self.context) }
-func (self *Surface) FillPreserve()		{ C.cairo_fill_preserve(self.context) }
-func (self *Surface) ClipPreserve()		{ C.cairo_clip_preserve(self.context) }
+func (self *Surface) FillPreserve()	{ C.cairo_fill_preserve(self.context) }
+func (self *Surface) ClipPreserve()	{ C.cairo_clip_preserve(self.context) }
 
 // Insideness testing
 
@@ -101,11 +101,18 @@ func (self *Surface) ClipExtents() (left, top, right, bottom float64) {
 
 func (self *Surface) ResetClip()	{ C.cairo_reset_clip(self.context) }
 
+
+type Rectangle struct {
+	X, Y          float64
+	Width, Height float64
+}
 func (self *Surface) ClipRectangleList() ([]Rectangle, Status) {
 	list := C.cairo_copy_clip_rectangle_list(self.context)
 	defer C.cairo_rectangle_list_destroy(list)
+
 	rects := make([]Rectangle, int(list.num_rectangles))
 	C.memcpy(unsafe.Pointer(&rects[0]), unsafe.Pointer(list.rectangles), C.size_t(list.num_rectangles*8))
+	
 	return rects, Status(list.status)
 }
 

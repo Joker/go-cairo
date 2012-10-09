@@ -46,10 +46,7 @@ const (
 
 
 
-type Rectangle struct {
-	X, Y          float64
-	Width, Height float64
-}
+
 
 type FontFace struct {
 	// todo

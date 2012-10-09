@@ -26,12 +26,12 @@ func SolidPatternRGBA(red, green, blue, alpha float64) (pattern *Pattern) {
 // cairo_pattern_t* cairo_pattern_create_linear (double x0, double y0, double x1, double y1);
 func LinearGradient(x0, y0, x1, y1 float64) (pattern *Pattern) {
 	return &Pattern{ C.cairo_pattern_create_linear( C.double(x0), C.double(y0),
-													C.double(x1), C.double(y1) )}
+							C.double(x1), C.double(y1) )}
 }
 // cairo_pattern_t* cairo_pattern_create_radial (double cx0, double cy0, double radius0, double cx1, double cy1, double radius1);
 func RadialGradient(cx0, cy0, radius0, cx1, cy1, radius1 float64) (pattern *Pattern) {
 	return &Pattern{ C.cairo_pattern_create_radial( C.double(cx0), C.double(cy0), C.double(radius0),
-													C.double(cx1), C.double(cy1), C.double(radius1) )}
+							C.double(cx1), C.double(cy1), C.double(radius1) )}
 }
 
 // void cairo_pattern_add_color_stop_rgb (cairo_pattern_t *pattern, double offset, double red, double green, double blue);
@@ -85,11 +85,11 @@ type PatternType int
 // cairo_pattern_type_t
 const (
 	PATTERN_TYPE_SOLID PatternType = iota
-    PATTERN_TYPE_SURFACE
-    PATTERN_TYPE_LINEAR
-    PATTERN_TYPE_RADIAL
-    PATTERN_TYPE_MESH
-    PATTERN_TYPE_RASTER_SOURCE
+	PATTERN_TYPE_SURFACE
+	PATTERN_TYPE_LINEAR
+	PATTERN_TYPE_RADIAL
+	PATTERN_TYPE_MESH
+	PATTERN_TYPE_RASTER_SOURCE
 )
 // cairo_pattern_type_t cairo_pattern_get_type (cairo_pattern_t *pattern);
 func (self *Pattern) GetType() (PatternType) {

@@ -109,9 +109,9 @@ const (
 )
 
 // void cairo_show_text_glyphs(cairo_t *cr, const char *utf8, int utf8_len,
-//                             const cairo_glyph_t *glyphs, int num_glyphs,
-//                             const cairo_text_cluster_t *clusters, int num_clusters,
-//                             cairo_text_cluster_flags_t cluster_flags );
+                            // const cairo_glyph_t *glyphs, int num_glyphs,
+                            // const cairo_text_cluster_t *clusters, int num_clusters,
+                            // cairo_text_cluster_flags_t cluster_flags );
 func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []TextCluster, flag TextClusterFlag) {
     utf8 := C.CString(text)
     defer C.free(unsafe.Pointer(utf8))
@@ -120,4 +120,39 @@ func (self *Surface) ShowTextGlyphs(text string, glyphs []Glyph, clusters []Text
                               (*C.cairo_glyph_t)(unsafe.Pointer(&glyphs[0])), C.int(len(glyphs)),
                               (*C.cairo_text_cluster_t)(unsafe.Pointer(&clusters[0])), C.int(len(clusters)),
                               C.cairo_text_cluster_flags_t(flag) );
+}
+
+
+
+
+
+
+
+
+func (self *Surface) SetFontMatrix(matrix Matrix) {
+        C.cairo_set_font_matrix(self.context, matrix.cairo_matrix_t())
+}
+
+func (self *Surface) SetFontOptions(fontOptions *FontOptions) {
+        panic("not implemented") // todo
+}
+func (self *Surface) GetFontOptions() *FontOptions {
+        panic("not implemented") // todo
+        return nil
+}
+
+func (self *Surface) SetFontFace(fontFace *FontFace) {
+        panic("not implemented") // todo
+}
+func (self *Surface) GetFontFace() *FontFace {
+        panic("not implemented") // todo
+        return nil
+}
+
+func (self *Surface) SetScaledFont(scaledFont *ScaledFont) {
+        panic("not implemented") // todo
+}
+func (self *Surface) GetScaledFont() *ScaledFont {
+        panic("not implemented") // todo
+        return nil
 }
